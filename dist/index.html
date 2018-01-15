@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>hadock - data distribution</title>
+    <style type="text/css">
+      * {
+        border-radius: 0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="hadock">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <header class="navbar-header">
+            <a class="navbar-brand" href="/">HDK</a>
+          </header>
+          <ul class="nav navbar-nav">
+            <li>
+              <router-link :to="{name: 'hdk.mon'}">monitor</router-link>
+            </li>
+            <li><a href="#">browse</a></li>
+          </ul>
+        </div>
+      </nav>
+      <main class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <router-view></router-view>
+          </div>
+        </div>
+      </main>
+      <footer class="container-fluid">
+        <hr/>
+        <p class="text-right text-muted">
+          <em>developped by <strong>B.USOC</strong></em>
+        </p>
+      </footer>
+    </div>
+    <script src="/bundle.js"></script>
+  </body>
+</html>
