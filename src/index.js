@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
+import './hadock.css'
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';

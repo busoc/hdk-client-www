@@ -1,27 +1,34 @@
 <template>
   <div>
     <router-view></router-view>
-    <header class="page-header">
-      <h1 class="text-capitalize">activities</h1>
-    </header>
-    <aside class="row" v-if="$store.getters.total > 0">
-      <div v-for="c in 3" class="col-sm-4 col-md-4">
-        <hdk-mon-preview></hdk-mon-preview>
+    <div v-if="$store.getters.total">
+      <header class="page-header">
+        <h1 class="text-capitalize">activities</h1>
+      </header>
+      <aside class="row" v-if="$store.getters.total > 0">
+        <div v-for="c in 3" class="col-sm-4 col-md-4">
+          <hdk-mon-preview></hdk-mon-preview>
+        </div>
+      </aside>
+      <hr/>
+      <ul class="nav nav-tabs nav-justified">
+        <li v-for="(ps, k, i) in $store.getters.products" role="presentation" :class="{active: i==0}">
+          <a :href="'#'+k" :arial-controls="k" role="tab" data-toggle="tab">{{k}}</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <section v-for="(ps, k, i) in $store.getters.products" role="tabpanel" :class="['tab-pane', {active: i==0}]" :id="k">
+          <aside class="well">
+            <p class="text-center">packets: <strong>{{total(ps)}}</strong>, duration: <strong>{{elapsed(ps).humanize()}}</strong></p>
+          </aside>
+          <hdk-mon-table :products="ps"></hdk-mon-table>
+        </section>
       </div>
-    </aside>
-    <hr/>
-    <ul class="nav nav-tabs nav-justified">
-      <li v-for="(ps, k, i) in $store.getters.products" role="presentation" :class="{active: i==0}">
-        <a :href="'#'+k" :arial-controls="k" role="tab" data-toggle="tab">{{k}}</a>
-      </li>
-    </ul>
-    <div class="tab-content">
-      <section v-for="(ps, k, i) in $store.getters.products" role="tabpanel" :class="['tab-pane', {active: i==0}]" :id="k">
-        <aside class="well">
-          <p class="text-center">packets: <strong>{{total(ps)}}</strong>, duration: <strong>{{elapsed(ps).humanize()}}</strong></p>
-        </aside>
-        <hdk-mon-table :products="ps"></hdk-mon-table>
-      </section>
+    </div>
+    <div v-else>
+      <aside class="alert alert-info">
+        <p class="text-capitalize">sorry, no activities are performed currently</p>
+      </aside>
     </div>
   </div>
 </template>
@@ -66,5 +73,9 @@ export default {
   width: 60px;
   max-width: 90px;
   height: auto;
+}
+aside.alert-info {
+  font-size: 18px;
+  margin: 120px auto;
 }
 </style>
