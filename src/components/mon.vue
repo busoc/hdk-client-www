@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="text-center">
+    <nav class="text-center" v-if="pages>1">
       <ul class="pagination">
         <li :class="{disabled:page==0}">
           <a href="#" v-on:click="page=page-1">&laquo;</a>
@@ -46,7 +46,7 @@
         </tr>
       </tbody>
     </table>
-    <nav class="text-center">
+    <nav class="text-center" v-if="pages>1">
       <ul class="pagination">
         <li :class="{disabled:page==0}">
           <a href="#" v-on:click="page=page-1">&laquo;</a>
