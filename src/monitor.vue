@@ -13,7 +13,7 @@
       <hr/>
       <ul class="nav nav-tabs nav-justified">
         <li v-for="(ps, k, i) in $store.getters.products" role="presentation" :class="{active: i==0}">
-          <a :href="'#'+k" :arial-controls="k" role="tab" data-toggle="tab">{{k}}</a>
+          <a :href="'#'+k" :arial-controls="k" role="tab" data-toggle="tab" v-on:click="current=k">{{k}}</a>
         </li>
       </ul>
       <div class="tab-content">
@@ -21,7 +21,7 @@
           <aside class="well">
             <p class="text-center">packets: <strong>{{total(ps)}}</strong>, duration: <strong>{{elapsed(ps).humanize()}}</strong></p>
           </aside>
-          <hdk-mon-table :products="ps"></hdk-mon-table>
+          <hdk-mon-table :products="ps" v-if="current==k || i==0"></hdk-mon-table>
         </section>
       </div>
     </div>
@@ -50,6 +50,7 @@ export default {
   data() {
     return {
       interval: undefined,
+      current: '',
     };
   },
   methods: {
