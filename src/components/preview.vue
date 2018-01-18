@@ -4,8 +4,8 @@
       <fieldset class="text-center">
         <div class="form-group form-group-sm">
           <label>instance</label>
-          <select class="form-control" @change="update()" v-model.number="instance">
-            <option v-for="c in [{label: 'OPS', value: 255}, {label: 'SIM1', value: 1}, {label: 'SIM2', value: 2}, {label: 'TEST', value: 0}]" :value="c.value">{{c.label}}</option>
+          <select class="form-control" @change="update()" v-model="instance">
+            <option v-for="c in [{label: 'OPS', value: '255'}, {label: 'SIM1', value: '001'}, {label: 'SIM2', value: '002'}, {label: 'TEST', value: '000'}]" :value="c.value">{{c.label}}</option>
           </select>
         </div>
         <div class="form-group form-group-sm">
