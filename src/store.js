@@ -101,8 +101,8 @@ const actions = {
     });
   },
   "product.image"({commit}, {url, mod}) {
-    return fetch(`${url}`, {method: "get", headers: {"accept": "image/png", "if-modified-since": mod}}).then(r => {
-      if (!ok) {
+    return fetch(`${url}`, {headers: {"accept": "image/png", "if-modified-since": mod}}).then(r => {
+      if (!r.ok) {
         return Promise.reject(r.statusText)
       }
       return r.blob()

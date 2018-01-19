@@ -29,7 +29,7 @@
       </fieldset>
     </form>
     <figure v-if="product">
-      <img :src="product.path" class="thumbnail center-block"/>
+      <img :src="blob" class="thumbnail center-block"/>
       <figcaption>
         <table class="table table-bordered">
           <tbody>
@@ -86,12 +86,14 @@ export default {
       if (this.interval) {
         clearInterval(this.interval);
       }
-      //this.interval = setInterval(_.bind(this.fetch, this), 1000);
-      this.interval = setInterval(_.bind(this.update, this), 1000);
+      this.fetch()
+      this.interval = setInterval(_.bind(_.throttle(this.fetch, 100), this), 1000);
+      //this.interval = setInterval(_.bind(this.update, this), 1000);
     },
     fetch() {
       let d = moment(this.product.timestamp).format("ddd, DD MMM YYYY HH:mm:ss")
-      this.$store.dispatch("product.image", {url: this.product.path, mod: d}).then(b => {
+      this.$store.dispatch("product.image", {url: this.product.path, mod: d})
+      .then(b => {
         this.blob = b;
         this.error = "";
       }).catch(r => {
