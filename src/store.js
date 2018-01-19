@@ -14,14 +14,14 @@ if (!source) {
   source = window.location.origin;
 }
 
-const retr = _.throttle((u) => {
+let retr = _.throttle(u => {
   return fetch(u, {headers: {accept: 'image/png'}}).then(r => {
     return r.ok ? r.blob() : Promise.reject(r.statusText)
   })
   .then(b => {
     return URL.createObjectURL(b)
   })
-}, 100, {leading: true});
+}, 10)
 
 const state = {
   interval: 1000,
@@ -111,13 +111,11 @@ const actions = {
   },
   "product.image"({commit}, {url, mod}) {
     // return fetch(`${url}`, {headers: {"accept": "image/png", "if-modified-since": mod}}).then(r => {
-    //   if (!r.ok) {
-    //     return Promise.reject(r.statusText)
-    //   }
-    //   return r.blob()
+    //   return r.ok ? r.blob() : Promise.reject(r.statusText)
     // }).then(rs => {
     //   return Promise.resolve(URL.createObjectURL(rs));
     // });
+    retr.flush();
     return retr(url);
   },
   "product.detail"({commit}, payload) {

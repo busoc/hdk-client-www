@@ -73,7 +73,7 @@ export default {
   },
   data() {
     return {
-      count: 30,
+      count: 25,
       page: 0,
     };
   },
