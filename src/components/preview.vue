@@ -83,7 +83,8 @@ export default {
   methods: {
     update() {
       let k = `${this.origin}-${this.mode?'realtime':'playback'}-${this.instance}`
-      this.product = this.$store.getters.images(k, this.channel);
+      let p = this.$store.getters.images(k, this.channel);
+      this.product = p ? p : this.product;
       if (!this.product) {
         return
       }

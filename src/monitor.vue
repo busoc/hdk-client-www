@@ -20,7 +20,7 @@
         </div>
       </aside>
       <hr/>
-      <ul class="nav nav-tabs nav-justified">
+      <ul class="['nav', 'nav-tabs', {'nav-justified': $store.getters.total>=3}]">
         <li v-for="(ps, k, i) in $store.getters.products" role="presentation" :class="{active: i==0}">
           <a :href="'#'+k" :arial-controls="k" role="tab" data-toggle="tab" v-on:click="current=k">{{k}}</a>
         </li>
