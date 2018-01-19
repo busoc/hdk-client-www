@@ -5,7 +5,16 @@
       <header class="page-header">
         <h1 class="text-capitalize">activities</h1>
       </header>
-      <aside class="row" v-if="$store.getters.total > 0">
+      <nav class="btn-group btn-group-sm pull-right">
+        <div class="clearfix"></div>
+        <button v-if="row>1" type="button" class="btn btn-default" v-on:click="row=row-1">
+          <i class="fa fa-fw fa-minus"></i>
+        </button>
+        <button type="button" class="btn btn-primary" v-on:click="row=row+1">
+          <i class="fa fa-fw fa-plus"></i>
+        </button>
+      </nav>
+      <aside class="row" v-if="$store.getters.total > 0" v-for="i in row">
         <div v-for="c in 3" class="col-sm-4 col-md-4">
           <hdk-mon-preview></hdk-mon-preview>
         </div>
@@ -51,6 +60,7 @@ export default {
     return {
       interval: undefined,
       current: '',
+      row: 1,
     };
   },
   methods: {

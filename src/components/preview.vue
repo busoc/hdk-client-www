@@ -38,6 +38,10 @@
               <td class="text-right">{{product.timestamp | strftime("YYYY-MM-DD HH:mm:ss")}}</td>
             </tr>
             <tr>
+              <th>sequence</th>
+              <td class="text-right">{{product.sequence}}</td>
+            </tr>
+            <tr>
               <th>reference</th>
               <td class="text-right">{{product.reference}}</td>
             </tr>
@@ -84,11 +88,10 @@ export default {
         return
       }
       if (this.interval) {
-        clearInterval(this.interval);
+        clearTimeout(this.interval);
       }
       this.fetch()
-      this.interval = setInterval(_.bind(_.throttle(this.fetch, 100), this), 1000);
-      //this.interval = setInterval(_.bind(this.update, this), 1000);
+      this.interval = setTimeout(_.bind(this.update, this), 1000);
     },
     fetch() {
       let d = moment(this.product.timestamp).format("ddd, DD MMM YYYY HH:mm:ss")
@@ -106,6 +109,7 @@ export default {
 </script>
 <style scoped>
 figure{
+  margin-bottom: 10px;
   background: #333333;
 }
 figcaption {
