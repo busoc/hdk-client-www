@@ -15,7 +15,7 @@
       </nav>
       <div class="clearfix"/>
       <aside class="row" v-if="$store.getters.total > 0" v-for="i in row">
-        <div v-for="c in 3" class="col-sm-4 col-md-4">
+        <div v-for="c in 3" class="col-sm-6 col-md-4">
           <hdk-mon-preview></hdk-mon-preview>
         </div>
       </aside>
