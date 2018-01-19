@@ -14,6 +14,15 @@ if (!source) {
   source = window.location.origin;
 }
 
+const retr = _.throttle((u) => {
+  return fetch(u, {headers: {accept: 'image/png'}}).then(r => {
+    return r.ok ? r.blob() : Promise.reject(r.statusText)
+  })
+  .then(b => {
+    return URL.createObjectURL(b)
+  })
+}, 100, {leading: true});
+
 const state = {
   interval: 1000,
   products: {},
@@ -101,14 +110,15 @@ const actions = {
     });
   },
   "product.image"({commit}, {url, mod}) {
-    return fetch(`${url}`, {headers: {"accept": "image/png", "if-modified-since": mod}}).then(r => {
-      if (!r.ok) {
-        return Promise.reject(r.statusText)
-      }
-      return r.blob()
-    }).then(rs => {
-      return Promise.resolve(URL.createObjectURL(rs));
-    });
+    // return fetch(`${url}`, {headers: {"accept": "image/png", "if-modified-since": mod}}).then(r => {
+    //   if (!r.ok) {
+    //     return Promise.reject(r.statusText)
+    //   }
+    //   return r.blob()
+    // }).then(rs => {
+    //   return Promise.resolve(URL.createObjectURL(rs));
+    // });
+    return retr(url);
   },
   "product.detail"({commit}, payload) {
     return fetch(`${payload}.xml`, {headers: {accept: "application/xml"}}).then(r => {

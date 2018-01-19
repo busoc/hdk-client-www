@@ -21,6 +21,7 @@
           <th class="text-center">origin</th>
           <th class="text-center">channel</th>
           <th class="text-center">mode</th>
+          <th class="text-center">count</th>
           <th class="text-center">timestamp</th>
           <th class="text-center">reference</th>
           <th></th>
@@ -33,9 +34,11 @@
           <td class="text-center">{{p.origin}}</td>
           <td class="text-center">{{p.channel}}</td>
           <td class="text-center">{{p.realtime|mode}}</td>
+          <td class="text-center">{{p.count}}</td>
           <td class="text-center">{{p.timestamp | strftime("YYYY-MM-DD HH:mm:ss")}}</td>
           <td class="text-center">
-            <img v-if="p.format=='image'" :src="p.path" class="img-thumbnail"/>
+            <!-- <img v-if="p.format=='image'" :src="p.path" class="img-thumbnail"/> -->
+            <hdk-img v-if="p.format=='image'" :path="p.path"></hdk-img>
             <em v-else class="text-muted">{{p.reference}}</em>
           </td>
           <td class="text-center">
@@ -62,6 +65,7 @@
   </div>
 </template>
 <script>
+import Img from "./img.vue"
 export default {
   name: 'hdk-mon-table',
   props: {
@@ -85,14 +89,9 @@ export default {
       }
       return Math.ceil(this.products.length/this.count);
     }
+  },
+  components: {
+    'hdk-img': Img,
   }
-
 }
 </script>
-<style scoped>
-.img-thumbnail {
-  width: 60px;
-  max-width: 90px;
-  height: auto;
-}
-</style>
