@@ -79,8 +79,7 @@ const mutations = {
         }
         return p;
       });
-      payload[k] = _.sortBy(payload[k], [p => p.sequence]);
-      _.reverse(payload[k]);
+      payload[k] = _.sortBy(payload[k], [p => -p.num]);
     });
     state.products = Object.assign({}, payload);
   },
