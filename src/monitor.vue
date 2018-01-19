@@ -5,8 +5,7 @@
       <header class="page-header">
         <h1 class="text-capitalize">activities</h1>
       </header>
-      <nav class="btn-group btn-group-sm pull-right">
-        <div class="clearfix"></div>
+      <nav class="btn-group btn-group-sm pull-right" style="margin-bottom: 10px">
         <button v-if="row>1" type="button" class="btn btn-default" v-on:click="row=row-1">
           <i class="fa fa-fw fa-minus"></i>
         </button>
@@ -14,6 +13,7 @@
           <i class="fa fa-fw fa-plus"></i>
         </button>
       </nav>
+      <div class="clearfix"/>
       <aside class="row" v-if="$store.getters.total > 0" v-for="i in row">
         <div v-for="c in 3" class="col-sm-4 col-md-4">
           <hdk-mon-preview></hdk-mon-preview>
