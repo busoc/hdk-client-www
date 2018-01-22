@@ -16,7 +16,9 @@
         </div>
         <div class="modal-body" v-if="product && product.format == 'image'">
           <p v-if="error" class="alert alert-danger">{{error}}</p>
-          <img :src="product.path" class="thumbnail center-block"/>
+          <figure v-if="blob">
+          <img :src="blob" class="thumbnail center-block"/>
+          </figure>
           <pre>{{meta}}</pre>
         </div>
         <div class="modal-body" v-else>
@@ -49,6 +51,7 @@ export default {
     return {
       meta: "",
       error: "",
+      blob: "",
       product: undefined,
     };
   },
@@ -76,6 +79,13 @@ export default {
           this.error = r;
           this.product = undefined;
         });
+      this.$store.dispatch('product.image', {url: p.path}).then(b => {
+        this.blob = b
+      })
+      .catch(e => {
+        this.error = e;
+        this.blob = "";
+      });
     },
   },
 };

@@ -23,6 +23,7 @@
           <th class="text-center">mode</th>
           <th class="text-center">count</th>
           <th class="text-center">timestamp</th>
+          <th class="text-center">upi</th>
           <th class="text-center">reference</th>
           <th></th>
         </tr>
@@ -36,6 +37,7 @@
           <td class="text-center">{{p.realtime|mode}}</td>
           <td class="text-center">{{p.count}}</td>
           <td class="text-center">{{p.timestamp | strftime("YYYY-MM-DD HH:mm:ss")}}</td>
+          <td class="text-center">{{p.upi}}</td>
           <td class="text-center">
             <!-- <img v-if="p.format=='image'" :src="p.path" class="img-thumbnail"/> -->
             <hdk-img v-if="p.format=='image'" :path="p.path"></hdk-img>
