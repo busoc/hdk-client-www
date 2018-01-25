@@ -82,6 +82,7 @@ export default {
   },
   methods: {
     update() {
+      this.blob = undefined;
       let k = `${this.origin}-${this.mode?'realtime':'playback'}-${this.instance}`
       let p = this.$store.getters.images(k, this.channel);
       this.product = p ? p : this.product;
