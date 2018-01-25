@@ -2,7 +2,10 @@
   <div>
     <img v-if="blob" :src="blob" class="img-thumbnail"/>
     <i class="fa fa-spinner fa-pulse fa-fw" v-else-if="!error && !blob"></i>
-    <i class="fa fa-fw fa-exclamation text-danger" v-if="error"></i>
+    <span v-if="error">
+      <i class="fa fa-fw fa-exclamation text-danger"></i>
+      <em class="text-muted">{{reference}}</em>
+    </span>
   </div>
 </template>
 <script>
@@ -12,6 +15,7 @@ export default {
   name: 'hdk-img',
   props: {
     path: String,
+    reference: String,
   },
   data() {
     return {
