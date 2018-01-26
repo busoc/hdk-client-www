@@ -60,6 +60,7 @@ const mutations = {
       payload[k] = payload[k].map(p => {
         p.timestamp = moment.unix(p.generated).toDate();
         p.path = ref(p, `${source}/products/`);
+        p.key = k
 
         switch (path.extname(p.reference)) {
         case ".h264":
@@ -83,6 +84,20 @@ const mutations = {
     });
     state.products = Object.assign({}, payload);
   },
+  "product.update"(state, {key, blob, url}) {
+    let vs = state.products[key]
+    if (!vs) {
+      return
+    }
+    let ix = vs.findIndex(p => p.path == url)
+    if (!ix) {
+      return
+    }
+    let p = state.products[key][ix]
+    if (!p.blob) {
+      state.products[key][ix] = Object.assign(p, {blob: blob})
+    }
+  }
 };
 
 const actions = {
