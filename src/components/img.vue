@@ -1,10 +1,11 @@
 <template>
   <div>
-    <img v-if="blob" :src="blob" class="img-thumbnail"/>
+    <img v-if="product.blob" :src="blob" class="img-thumbnail"/>
+    <img v-else="blob" :src="blob" class="img-thumbnail"/>
     <i class="fa fa-spinner fa-pulse fa-fw" v-else-if="!error && !blob"></i>
     <span v-if="error">
       <i class="fa fa-fw fa-exclamation text-danger"></i>
-      <em class="text-muted">{{reference}}</em>
+      <em class="text-muted">{{product.reference}}</em>
     </span>
   </div>
 </template>
@@ -14,6 +15,7 @@ import _ from 'lodash';
 export default {
   name: 'hdk-img',
   props: {
+    product: Object,
     path: String,
     reference: String,
   },
@@ -28,8 +30,9 @@ export default {
   },
   methods: {
     fetch() {
-      this.$store.dispatch('product.image', {url: this.path}).then(b => {
+      this.$store.dispatch('product.image', {url: this.product.path, key: this.product.key}).then(b => {
         this.blob = b
+        this.$store.commit("product.detail", {key: this.product.key, url: this.product.path, blob: b})
       })
       .catch(e => {
         this.error = e;

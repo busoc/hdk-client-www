@@ -115,11 +115,15 @@ const actions = {
       return Promise.resolve();
     });
   },
-  "product.image"({commit}, {url, mod}) {
+  "product.image"({commit}, {url, mod, key}) {
     return fetch(`${url}`, {headers: {"accept": "image/png", "if-modified-since": mod}}).then(r => {
       return r.ok ? r.blob() : Promise.reject(r.statusText)
     }).then(rs => {
-      return Promise.resolve(URL.createObjectURL(rs));
+      let blob = URL.createObjectURL(rs)
+      if (key) {
+        commit("product.update", {key: key, blob: blob, url: url})
+      }
+      return Promise.resolve(blob);
     });
   },
   "product.detail"({commit}, payload) {

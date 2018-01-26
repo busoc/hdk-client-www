@@ -40,7 +40,7 @@
           <td class="text-center">{{p.upi}}</td>
           <td class="text-center">
             <!-- <img v-if="p.format=='image'" :src="p.path" class="img-thumbnail"/> -->
-            <hdk-img v-if="p.format=='image'" :path="p.path" :reference="p.reference"></hdk-img>
+            <hdk-img v-if="p.format=='image'" :product="p" :path="p.path" :reference="p.reference"></hdk-img>
             <em v-else class="text-muted">{{p.reference}}</em>
           </td>
           <td class="text-center">

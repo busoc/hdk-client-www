@@ -29,7 +29,8 @@
       </fieldset>
     </form>
     <figure v-if="product">
-      <img :src="blob" class="thumbnail center-block"/>
+      <img v-if="product.blob" :src="product.blob" class="thumbnail center-block"/>
+      <img v-else :src="blob" class="thumbnail center-block"/>
       <figcaption>
         <table class="table table-bordered">
           <tbody>
@@ -100,6 +101,7 @@ export default {
       .then(b => {
         this.blob = b;
         this.error = "";
+        this.$store.commit("product.detail", {key: this.product.key, url: this.product.path, blob: b})
       }).catch(r => {
         this.blob = undefined;
         this.error = r;
