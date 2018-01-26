@@ -58,7 +58,7 @@ const mutations = {
     }
     Object.keys(payload).forEach(k => {
       payload[k] = payload[k].map(p => {
-        p.timestamp = moment.unix(p.timestamp).toDate();
+        p.timestamp = moment.unix(p.generated).toDate();
         p.path = ref(p, `${source}/products/`);
 
         switch (path.extname(p.reference)) {
